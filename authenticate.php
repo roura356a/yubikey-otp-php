@@ -1,6 +1,6 @@
 <?php
 
-require_once 'vendor/Yubico.php';
+require_once 'Auth/Yubico.php';
 $config  = require_once 'config.php';
 $yubikey = new Auth_Yubico( $config['clientId'], $config['clientKey'] );
 
