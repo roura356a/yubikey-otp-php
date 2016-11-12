@@ -1,0 +1,35 @@
+* {
+    outline: none;
+}
+
+body {
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: yellowgreen;
+}
+
+input {
+    width: calc(100vw - 30px);
+    text-align: center;
+    height: 45px;
+    max-width: 372px;
+    font-size: 16px;
+    border: 0;
+    border-radius: 25px;
+}
+
+label {
+    display: none;
+}
+
+@media speech {
+    label {
+        display: block;
+    }
+}
