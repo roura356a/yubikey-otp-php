@@ -2,12 +2,14 @@
 
 require_once 'Auth/Yubico.php';
 $config  = require_once 'config.php';
+$keys    = require_once 'keys.php';
 $yubikey = new Auth_Yubico( $config['clientId'], $config['clientKey'] );
 
 $key = $_POST['key'];
 
 if ( $key ) {
 	$verify = verifyYubikey( $key, $yubikey );
+	
 }
 
 /**
