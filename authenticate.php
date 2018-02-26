@@ -14,12 +14,13 @@ if ($key) {
  * This basic function just validates the OTP against Yubico's API
  * using the API key stored in `config.php`.
  *
- * @param $key
- * @param $yubikey
+ * @param String $key
+ * @param array $auth_keys
+ * @param Auth_Yubico $yubikey
  *
- * @return mixed
+ * @return bool|object
  */
-function verifyYubikey($key, $auth_keys, $yubikey)
+function verifyYubikey(String $key, Array $auth_keys, Auth_Yubico $yubikey)
 {
     $otp  = $yubikey->parsePasswordOTP(htmlspecialchars($key))['otp'];
     $auth = $yubikey->verify($otp);
