@@ -9,7 +9,7 @@
 
 <form method="post">
 	<label for="key">Yubikey OTP</label>
-	<input autocomplete="off" placeholder="Push the button of your Yubikey here" id="key" type="password" name="key">
+	<input data-lpignore="true" autocomplete="off" placeholder="Push the button of your Yubikey here" id="key" type="password" name="key">
 </form>
 
 <h1><?php echo $verify === true ? 'Wohooo!' : $verify->message; ?></h1>
