@@ -2,14 +2,12 @@
 
 require_once 'Auth/Yubico.php';
 $config  = require_once 'config.php';
-$keys    = require_once 'keys.php';
-$yubikey = new Auth_Yubico( $config['clientId'], $config['clientKey'] );
+$yubikey = new Auth_Yubico($config['clientId'], $config['clientKey']);
 
 $key = $_POST['key'];
 
-if ( $key ) {
-	$verify = verifyYubikey( $key, $yubikey );
-	
+if ($key) {
+    $verify = verifyYubikey($key, $config['auth_keys'], $yubikey);
 }
 
 /**
@@ -21,9 +19,14 @@ if ( $key ) {
  *
  * @return mixed
  */
-function verifyYubikey( $key, $yubikey ) {
-	$otp  = $yubikey->parsePasswordOTP( htmlspecialchars( $key ) )['otp'];
-	$auth = $yubikey->verify( $otp );
+function verifyYubikey($key, $auth_keys, $yubikey)
+{
+    $otp  = $yubikey->parsePasswordOTP(htmlspecialchars($key))['otp'];
+    $auth = $yubikey->verify($otp);
 
-	return gettype( $auth ) == 'object' ? $auth : true;
+    if (!in_array(substr($key, 0, 12), $auth_keys)) {
+        return (object)['message' => 'KEY_NOT_RECOGNISED'];
+    }
+
+    return gettype($auth) === 'object' ? $auth : true;
 }
